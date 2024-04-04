@@ -1,23 +1,4 @@
 steps:
-  # Step 1: Checkout the source code repository
-  - name: 'gcr.io/cloud-builders/git'
-    args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
-    dir: 'workspace'  # Adjust this according to your directory structure
-
-  # Step 2: Install Databricks CLI
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['components', 'install', 'dbx']
-
-  # Step 3: Deploy notebooks to Databricks workspace
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
+  - name: 'gcr.io/cloud-builders/echo'
     args:
-      - '-c'
-      - |
-        # Authenticate Databricks CLI
-        echo $DATABRICKS_TOKEN | databricks configure --token
-        
-        # Loop through notebooks and deploy to Databricks workspace
-        for notebook in workspace/notebooks/*.ipynb; do
-          databricks workspace import -f IPYNB "$notebook" /<path_in_databricks_workspace>/
-        done
+      - 'Hello, Cloud Build!'
