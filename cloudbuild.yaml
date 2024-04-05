@@ -21,7 +21,7 @@ steps:
         echo "dapicd225a3be886969133e88a58e9afe2bd-3"
         
         # Specific notebook deployment commands (replace with your commands)
-        databricks notebooks publish --overwrite --path abc/notebook.dbc /Users/mayo8624/Gold.py
+        databricks workspace import -o --notebook /Users/mayo8624/Gold.py /abc/notebook.dbc
         
         # Additional Databricks CLI commands as needed
 options:
