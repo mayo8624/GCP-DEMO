@@ -7,11 +7,11 @@ images:
   - 'timvancann/databricks-cli'  # Replace with image containing Databricks CLI (pre-installed or custom)
 
 # Define environment variables (replace with your values)
-env:
-  - name: DATABRICKS_HOST
-    value: 'https://adb-1499785588441012.12.azuredatabricks.net/'
-  - name: DATABRICKS_TOKEN  # Or reference a secret manager for better security
-    value: 'dapicd225a3be886969133e88a58e9afe2bd-3'
+# env:
+#   - name: DATABRICKS_HOST
+#     value: 'https://adb-1499785588441012.12.azuredatabricks.net/'
+#   - name: DATABRICKS_TOKEN  # Or reference a secret manager for better security
+#     value: 'dapicd225a3be886969133e88a58e9afe2bd-3'
 
 steps:
   # Step 1: Clone the notebook repository
@@ -37,6 +37,11 @@ steps:
 options:
   # Configure logs and notifications (optional)
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+  env:
+  - name: DATABRICKS_HOST
+    value: 'https://adb-1499785588441012.12.azuredatabricks.net/'
+  - name: DATABRICKS_TOKEN  # Or reference a secret manager for better security
+    value: 'dapicd225a3be886969133e88a58e9afe2bd-3'
 
 
 
