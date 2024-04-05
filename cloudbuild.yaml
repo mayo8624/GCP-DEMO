@@ -4,9 +4,10 @@ steps:
     args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
     dir: 'workspace'  # Adjust this according to your directory structure
 
-  # Step 2: Install Databricks CLI
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['components', 'install', 'dbx']
+steps:
+ - name: 'gcr.io/cloud-builders/install/databricks'  # Use the official Cloud Build Databricks installer image
+   args: ['--version', 'latest']  # Optional: Specify a Databricks CLI version (defaults to latest)
+
 
   # Step 3: Deploy notebooks to Databricks workspace
   # - name: 'gcr.io/cloud-builders/gcloud'
