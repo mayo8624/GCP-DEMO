@@ -3,17 +3,16 @@ serviceAccount: "gcp-sp@databricks-devops.iam.gserviceaccount.com"
 
 # Specify the Docker images (replace with appropriate images)
 images:
-  - 'gcr.io/cloud-builders/git'  # For cloning the notebook repository
-  - 'timvancann/databricks-cli'  # Replace with image containing Databricks CLI (pre-installed or custom)
-
+  - 'gcr.io/cloud-builders/git'  
+  - 'timvancann/databricks-cli'
 steps:
   # Step 1: Clone the notebook repository
-  - name: 'gcr.io/cloud-builders/git'  # Use the git image
+  - name: 'gcr.io/cloud-builders/git' 
     args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
     dir: 'workspace'
 
   # Step 2: Deploy notebook to Databricks (using your preferred image)
-  - name: 'timvancann/databricks-cli'  # Use your Databricks CLI image
+  - name: 'timvancann/databricks-cli' 
     entrypoint: 'bash'
     args:
       - '-c'
@@ -24,8 +23,6 @@ steps:
         # Specific notebook deployment commands (replace with your commands)
         databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
 
-  # Optional steps (e.g., unit tests, additional configurations)
-  # ...
 
 options:
   # Configure logs and notifications (optional)
@@ -41,7 +38,7 @@ options:
 #   # Step 1: Checkout the source code repository
 #   - name: 'gcr.io/cloud-builders/git'
 #     args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
-#     dir: 'workspace'  # Adjust this according to your directory structure
+#     dir: 'workspace' 
 
 #   # Step 2: Configure Databricks CLI
 #   - name: 'timvancann/databricks-cli'
