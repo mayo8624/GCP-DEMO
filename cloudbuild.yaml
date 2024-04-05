@@ -8,12 +8,11 @@ steps:
     # args: ['--version', 'latest']  # Optional: Specify a Databricks CLI version (defaults to latest)
 
   # Step 3: Deploy notebooks to Databricks workspace
-  - name: 'Run Databricks CLI commands'
-    args: ['--']  # Separate build commands from container entrypoint
-  # Replace these commands with your specific Databricks notebook deployment tasks
-  # (e.g., login, cluster creation, notebook execution, etc.)
-    command: [
-      'bash', '-c', '
+  - name: 'gcr.io/cloud-builders/databricks'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
         # Login to Databricks (replace with your credentials)
         databricks configure --token dapicd225a3be886969133e88a58e9afe2bd-3
         
