@@ -1,6 +1,16 @@
-steps:
-  - name: 'gcr.io/cloud-builders/echo'
+# steps:
+#   - name: 'gcr.io/cloud-builders/echo'
+#     args:
+#       - 'Hello, Cloud Build!'
+# options:
+#   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+step:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: "bash"
     args:
-      - 'Hello, Cloud Build!'
-options:
-  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+      - "-c"
+      - |
+          echo "enter 1 bash command per line"
+          ls -la
+          gcloud version
+          ...
