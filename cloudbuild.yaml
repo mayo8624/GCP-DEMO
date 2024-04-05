@@ -20,7 +20,5 @@ steps:
         # databricks notebooks publish --overwrite --path /path/to/your/notebook.dbc /Users/<your-username>/<notebook-name>.dbc
         
         # Additional Databricks CLI commands as needed
-      '
-    ]
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
