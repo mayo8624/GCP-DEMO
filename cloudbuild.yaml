@@ -18,7 +18,7 @@ steps:
     dir: 'workspace'
 
   # Step 2: Deploy notebook to Databricks (using your preferred image)
-- name: 'timvancann/databricks-cli'
+  - name: 'timvancann/databricks-cli'
     entrypoint: 'bash'
     args:
       - '-c'
