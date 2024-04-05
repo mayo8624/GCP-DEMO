@@ -13,11 +13,11 @@ steps:
     args:
       - '-c'
       - |
-        export DATABRICKS_HOST=https://adb-1499785588441012.12.azuredatabricks.net
-        export token=dapicd225a3be886969133e88a58e9afe2bd-3
-        /usr/local/bin/databricks configure --token $token  # Add this line to configure the CLI
-        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | /usr/local/bin/databricks configure --token # Provide your token
-        # ... (rest of your commands)
+        # Set Databricks Host
+        export DATABRICKS_HOST="https://adb-1499785588441012.12.azuredatabricks.net"
+        
+        # Configure Databricks CLI
+        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | /usr/local/bin/databricks configure --token
         
         # Specific notebook deployment commands (replace with your commands)
         databricks workspace import -o --language PYTHON /Users/mayo8624/Gold.py /abc/notebook
