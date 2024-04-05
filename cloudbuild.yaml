@@ -10,17 +10,8 @@ steps:
     args:
       - '-c'
       - |
-        # Prompt for Databricks Host URL
-        read -p "https://adb-1499785588441012.12.azuredatabricks.net/" DATABRICKS_HOST
-        
-        # Validate Databricks Host URL
-        if [[ ! $DATABRICKS_HOST =~ ^https:// ]]; then
-          echo "Error: The host does not start with https://"
-          exit 1
-        fi
-        
         # Configure Databricks CLI with token
-        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | databricks configure --host "$DATABRICKS_HOST"
+        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | databricks configure --host "https://adb-1499785588441012.12.azuredatabricks.net"
 
   # Step 3: Import notebook into Databricks workspace
   - name: 'timvancann/databricks-cli'
