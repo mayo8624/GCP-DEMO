@@ -8,18 +8,20 @@ steps:
     # args: ['--version', 'latest']  # Optional: Specify a Databricks CLI version (defaults to latest)
 
   # Step 3: Deploy notebooks to Databricks workspace
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        # Authenticate Databricks CLI
-        echo dapicd225a3be886969133e88a58e9afe2bd-3 | databricks configure --token
+  - name: 'Run Databricks CLI commands'
+  args: ['--']  # Separate build commands from container entrypoint
+  # Replace these commands with your specific Databricks notebook deployment tasks
+  # (e.g., login, cluster creation, notebook execution, etc.)
+  command: [
+      'bash', '-c', '
+        # Login to Databricks (replace with your credentials)
+        databricks configure --token dapicd225a3be886969133e88a58e9afe2bd-3
         
-        # Loop through notebooks and deploy to Databricks workspace
-        # for notebook in workspace/notebooks/*.ipynb; do
-        #   databricks workspace import -f IPYNB "$notebook" /<path_in_databricks_workspace>/
-        # done
-
+        # Specific notebook deployment commands (replace with your commands)
+        # databricks notebooks publish --overwrite --path /path/to/your/notebook.dbc /Users/<your-username>/<notebook-name>.dbc
+        
+        # Additional Databricks CLI commands as needed
+      '
+  ]
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
