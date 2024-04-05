@@ -6,6 +6,11 @@ images:
   - 'gcr.io/cloud-builders/git'  
   - 'timvancann/databricks-cli'
 
+# Define substitutions for environment variables
+substitutions:
+  _DATABRICKS_HOST: 'https://adb-1499785588441012.12.azuredatabricks.net/'
+  _DATABRICKS_TOKEN: 'dapicd225a3be886969133e88a58e9afe2bd-3'
+
 steps:
   # Step 1: Clone the notebook repository
   - name: 'gcr.io/cloud-builders/git' 
@@ -19,7 +24,7 @@ steps:
       - '-c'
       - |
         # Configure Databricks CLI
-        /usr/local/bin/databricks configure --token $DATABRICKS_TOKEN
+        /usr/local/bin/databricks configure --token $_DATABRICKS_TOKEN
 
         # Specific notebook deployment commands (replace with your commands)
         databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
@@ -28,12 +33,6 @@ options:
   # Configure logs and notifications (optional)
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 
-# Define environment variables (replace with your values)
-env:
-  - name: DATABRICKS_HOST
-    value: 'https://adb-1499785588441012.12.azuredatabricks.net/'
-  - name: DATABRICKS_TOKEN
-    value: 'dapicd225a3be886969133e88a58e9afe2bd-3'
 
 # steps:
 #   # Step 1: Checkout the source code repository
