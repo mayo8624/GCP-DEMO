@@ -1,36 +1,78 @@
+# Define the service account used by Cloud Build
+serviceAccount: "gcp-sp@databricks-devops.iam.gserviceaccount.com"
+
+# Specify the Docker images (replace with appropriate images)
+images:
+  - 'gcr.io/cloud-builders/git'  # For cloning the notebook repository
+  - 'timvancann/databricks-cli'  # Replace with image containing Databricks CLI (pre-installed or custom)
+
+# Define environment variables (replace with your values)
+env:
+  - name: DATABRICKS_HOST
+    value: 'https://adb-1499785588441012.12.azuredatabricks.net/'
+  - name: DATABRICKS_TOKEN  # Or reference a secret manager for better security
+    value: 'dapicd225a3be886969133e88a58e9afe2bd-3'
+
 steps:
-  # Step 1: Checkout the source code repository
-  - name: 'gcr.io/cloud-builders/git'
+  # Step 1: Clone the notebook repository
+  - name: $images[0]  # Use the git image
     args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
-    dir: 'workspace'  # Adjust this according to your directory structure
+    dir: 'workspace'
 
-  # Step 2: Configure Databricks CLI
-  - name: 'timvancann/databricks-cli'
+  # Step 2: Deploy notebook to Databricks (using your preferred image)
+  - name: $images[1]  # Use your Databricks CLI image
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Prompt for Databricks Host URL
-        read -p "Enter Databricks Host URL (should begin with https://): " DATABRICKS_HOST
-        
-        # Validate Databricks Host URL
-        if [[ ! $DATABRICKS_HOST =~ ^https:// ]]; then
-          echo "Error: The host does not start with https://"
-          exit 1
-        fi
-        
-        # Configure Databricks CLI with token
-        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | databricks configure --host "$DATABRICKS_HOST" --token
+        # Configure Databricks CLI
+        /usr/local/bin/databricks configure --token $DATABRICKS_TOKEN
 
-  # Step 3: Import notebook into Databricks workspace
-  - name: 'timvancann/databricks-cli'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        # Import notebook into Databricks workspace
+        # Specific notebook deployment commands (replace with your commands)
         databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
-        
-        # Additional Databricks CLI commands as needed
+
+  # Optional steps (e.g., unit tests, additional configurations)
+  # ...
+
 options:
+  # Configure logs and notifications (optional)
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+
+
+
+# steps:
+#   # Step 1: Checkout the source code repository
+#   - name: 'gcr.io/cloud-builders/git'
+#     args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
+#     dir: 'workspace'  # Adjust this according to your directory structure
+
+#   # Step 2: Configure Databricks CLI
+#   - name: 'timvancann/databricks-cli'
+#     entrypoint: 'bash'
+#     args:
+#       - '-c'
+#       - |
+#         # Prompt for Databricks Host URL
+#         read -p "Enter Databricks Host URL (should begin with https://): " DATABRICKS_HOST
+        
+#         # Validate Databricks Host URL
+#         if [[ ! $DATABRICKS_HOST =~ ^https:// ]]; then
+#           echo "Error: The host does not start with https://"
+#           exit 1
+#         fi
+        
+#         # Configure Databricks CLI with token
+#         echo "dapicd225a3be886969133e88a58e9afe2bd-3" | databricks configure --host "$DATABRICKS_HOST" --token
+
+#   # Step 3: Import notebook into Databricks workspace
+#   - name: 'timvancann/databricks-cli'
+#     entrypoint: 'bash'
+#     args:
+#       - '-c'
+#       - |
+#         # Import notebook into Databricks workspace
+#         databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
+        
+#         # Additional Databricks CLI commands as needed
+# options:
+#   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
