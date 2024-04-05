@@ -5,6 +5,7 @@ serviceAccount: "gcp-sp@databricks-devops.iam.gserviceaccount.com"
 images:
   - 'gcr.io/cloud-builders/git'  
   - 'timvancann/databricks-cli'
+
 steps:
   # Step 1: Clone the notebook repository
   - name: 'gcr.io/cloud-builders/git' 
@@ -23,16 +24,16 @@ steps:
         # Specific notebook deployment commands (replace with your commands)
         databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
 
-
 options:
   # Configure logs and notifications (optional)
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
-  env:
+
+# Define environment variables (replace with your values)
+env:
   - name: DATABRICKS_HOST
     value: 'https://adb-1499785588441012.12.azuredatabricks.net/'
   - name: DATABRICKS_TOKEN
     value: 'dapicd225a3be886969133e88a58e9afe2bd-3'
-
 
 # steps:
 #   # Step 1: Checkout the source code repository
