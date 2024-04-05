@@ -6,21 +6,14 @@ images:
   - 'gcr.io/cloud-builders/git'  # For cloning the notebook repository
   - 'timvancann/databricks-cli'  # Replace with image containing Databricks CLI (pre-installed or custom)
 
-# Define environment variables (replace with your values)
-# env:
-#   - name: DATABRICKS_HOST
-#     value: 'https://adb-1499785588441012.12.azuredatabricks.net/'
-#   - name: DATABRICKS_TOKEN  # Or reference a secret manager for better security
-#     value: 'dapicd225a3be886969133e88a58e9afe2bd-3'
-
 steps:
   # Step 1: Clone the notebook repository
-  - name: $images[0]  # Use the git image
+  - name: 'gcr.io/cloud-builders/git'  # Use the git image
     args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
     dir: 'workspace'
 
   # Step 2: Deploy notebook to Databricks (using your preferred image)
-  - name: $images[1]  # Use your Databricks CLI image
+  - name: 'timvancann/databricks-cli'  # Use your Databricks CLI image
     entrypoint: 'bash'
     args:
       - '-c'
@@ -40,9 +33,8 @@ options:
   env:
   - name: DATABRICKS_HOST
     value: 'https://adb-1499785588441012.12.azuredatabricks.net/'
-  - name: DATABRICKS_TOKEN  # Or reference a secret manager for better security
+  - name: DATABRICKS_TOKEN
     value: 'dapicd225a3be886969133e88a58e9afe2bd-3'
-
 
 
 # steps:
