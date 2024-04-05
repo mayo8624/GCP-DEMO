@@ -4,23 +4,32 @@ steps:
     args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
     dir: 'workspace'  # Adjust this according to your directory structure
 
-  - name: 'timvancann/databricks-cli'  # Use the official Cloud Build Databricks installer image
-    # args: ['--version', 'latest']  # Optional: Specify a Databricks CLI version (defaults to latest)
-
-  # Step 3: Deploy notebooks to Databricks workspace
+  # Step 2: Configure Databricks CLI
   - name: 'timvancann/databricks-cli'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Set Databricks Host
-        export DATABRICKS_HOST="https://adb-1499785588441012.12.azuredatabricks.net"
+        # Prompt for Databricks Host URL
+        read -p "https://adb-1499785588441012.12.azuredatabricks.net/" DATABRICKS_HOST
         
-        # Configure Databricks CLI
-        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | /usr/local/bin/databricks configure --token
+        # Validate Databricks Host URL
+        if [[ ! $DATABRICKS_HOST =~ ^https:// ]]; then
+          echo "Error: The host does not start with https://"
+          exit 1
+        fi
         
-        # Specific notebook deployment commands (replace with your commands)
-        databricks workspace import -o --language PYTHON /Users/mayo8624/Gold.py /abc/notebook
+        # Configure Databricks CLI with token
+        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | databricks configure --host "$DATABRICKS_HOST"
+
+  # Step 3: Import notebook into Databricks workspace
+  - name: 'timvancann/databricks-cli'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Import notebook into Databricks workspace
+        databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
         
         # Additional Databricks CLI commands as needed
 options:
