@@ -9,10 +9,10 @@ steps:
 
   # Step 3: Deploy notebooks to Databricks workspace
   - name: 'Run Databricks CLI commands'
-  args: ['--']  # Separate build commands from container entrypoint
+    args: ['--']  # Separate build commands from container entrypoint
   # Replace these commands with your specific Databricks notebook deployment tasks
   # (e.g., login, cluster creation, notebook execution, etc.)
-  command: [
+    command: [
       'bash', '-c', '
         # Login to Databricks (replace with your credentials)
         databricks configure --token dapicd225a3be886969133e88a58e9afe2bd-3
@@ -22,6 +22,6 @@ steps:
         
         # Additional Databricks CLI commands as needed
       '
-  ]
+    ]
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
