@@ -10,7 +10,7 @@ steps:
     args:
       - '-c'
       - |
-        # Set Databricks Host URL
+        # Prompt for Databricks Host URL
         read -p "Enter Databricks Host URL (should begin with https://): " DATABRICKS_HOST
         
         # Validate Databricks Host URL
