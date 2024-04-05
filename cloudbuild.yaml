@@ -5,7 +5,7 @@ steps:
     dir: 'workspace'  # Adjust this according to your directory structure
 
   - name: 'timvancann/databricks-cli'  # Use the official Cloud Build Databricks installer image
-    args: ['--version', 'latest']  # Optional: Specify a Databricks CLI version (defaults to latest)
+    # args: ['--version', 'latest']  # Optional: Specify a Databricks CLI version (defaults to latest)
 
   # Step 3: Deploy notebooks to Databricks workspace
   - name: 'gcr.io/cloud-builders/gcloud'
