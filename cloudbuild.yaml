@@ -1,7 +1,7 @@
 steps:
   # Step 1: Checkout the source code repository
   - name: 'gcr.io/cloud-builders/git'
-    args: ['clone', 'https://github.com/your/repository.git']
+    args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
     dir: 'workspace'  # Adjust this according to your directory structure
 
   # Step 2: Install Databricks CLI
