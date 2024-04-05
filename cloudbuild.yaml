@@ -16,7 +16,7 @@ steps:
         # Set Databricks Host
         export DATABRICKS_HOST="https://adb-1499785588441012.12.azuredatabricks.net"
         # Login to Databricks using token
-        databricks configure --token
+        /usr/local/bin/databricks configure --token
         # Enter your token when prompted
         echo "dapicd225a3be886969133e88a58e9afe2bd-3"
         
