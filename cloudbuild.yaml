@@ -21,7 +21,7 @@ steps:
         echo "dapicd225a3be886969133e88a58e9afe2bd-3"
         
         # Specific notebook deployment commands (replace with your commands)
-        # databricks notebooks publish --overwrite --path /path/to/your/notebook.dbc /Users/<your-username>/<notebook-name>.dbc
+        databricks notebooks publish --overwrite --path /path/to/your/notebook.dbc /Users/<your-username>/<notebook-name>.dbc
         
         # Additional Databricks CLI commands as needed
 options:
