@@ -20,6 +20,6 @@ steps:
         # Loop through notebooks and deploy to Databricks workspace
         # for notebook in workspace/notebooks/*.ipynb; do
         #   databricks workspace import -f IPYNB "$notebook" /<path_in_databricks_workspace>/
-        # done
+        done
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
