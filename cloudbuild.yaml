@@ -22,4 +22,4 @@ steps:
           databricks workspace import -f IPYNB "$notebook" /<path_in_databricks_workspace>/
         done
 options:
-logging: CLOUD_LOGGING_ONLY
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
