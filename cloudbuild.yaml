@@ -8,7 +8,7 @@ steps:
     # args: ['--version', 'latest']  # Optional: Specify a Databricks CLI version (defaults to latest)
 
   # Step 3: Deploy notebooks to Databricks workspace
-  - name: 'gcr.io/cloud-builders/databricks'
+  - name: 'timvancann/databricks-cli'
     entrypoint: 'bash'
     args:
       - '-c'
