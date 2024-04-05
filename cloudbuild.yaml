@@ -11,7 +11,7 @@ steps:
       - '-c'
       - |
         # Configure Databricks CLI with token
-        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | databricks configure --host "https://adb-1499785588441012.12.azuredatabricks.net"
+        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | databricks configure --token
 
   # Step 3: Import notebook into Databricks workspace
   - name: 'timvancann/databricks-cli'
