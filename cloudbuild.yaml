@@ -14,10 +14,9 @@ steps:
       - '-c'
       - |
         # Set Databricks Host
-        export DATABRICKS_HOST="https://adb-1499785588441012.12.azuredatabricks.net"
+        export DATABRICKS_HOST=https://adb-1499785588441012.12.azuredatabricks.net
         # Login to Databricks using token
-        # echo "dapicd225a3be886969133e88a58e9afe2bd-3" | 
-        /usr/local/bin/databricks configure --host "$DATABRICKS_HOST"
+        echo "dapicd225a3be886969133e88a58e9afe2bd-3" | /usr/local/bin/databricks configure --token
         
         # Specific notebook deployment commands (replace with your commands)
         databricks workspace import -o --language PYTHON /Users/mayo8624/Gold.py /abc/notebook
