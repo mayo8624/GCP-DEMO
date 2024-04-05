@@ -8,7 +8,7 @@ images:
 
 # Define substitutions for environment variables
 substitutions:
-  _DATABRICKS_HOST: 'https://adb-1499785588441012.12.azuredatabricks.net/'
+  _DATABRICKS_HOST: 'https://adb-1499785588441012.12.azuredatabricks.net'
   _DATABRICKS_TOKEN: 'dapicd225a3be886969133e88a58e9afe2bd-3'
 
 steps:
