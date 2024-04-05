@@ -13,6 +13,8 @@ steps:
     args:
       - '-c'
       - |
+        # Set Databricks Host
+        export DATABRICKS_HOST="https://adb-1499785588441012.12.azuredatabricks.net/settings/user/developer/access-tokens?o=1499785588441012"
         # Login to Databricks using token
         databricks configure --token
         # Enter your token when prompted
