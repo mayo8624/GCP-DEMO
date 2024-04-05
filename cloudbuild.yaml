@@ -14,3 +14,8 @@ steps:
           ls -la
           gcloud version
           ...
+build:
+  # ... (existing configuration)
+  options:
+    # ... (existing options)
+    logging: REGIONAL_USER_OWNED_BUCKET
