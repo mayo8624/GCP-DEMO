@@ -24,7 +24,7 @@ steps:
       - '-c'
       - |
         # Configure Databricks CLI
-        echo $_DATABRICKS_HOST | databricks configure --token
+        databricks configure --host $_DATABRICKS_HOST --token $_DATABRICKS_TOKEN
 
         # Specific notebook deployment commands (replace with your commands)
         databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
