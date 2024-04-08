@@ -8,8 +8,8 @@ images:
 
 # Define substitutions for environment variables
 substitutions:
-  DATABRICKS_HOST: 'https://adb-1499785588441012.12.azuredatabricks.net'
-  DATABRICKS_TOKEN: 'dapicd225a3be886969133e88a58e9afe2bd-3'
+  _DATABRICKS_HOST: 'https://adb-1499785588441012.12.azuredatabricks.net'
+  _DATABRICKS_TOKEN: 'dapicd225a3be886969133e88a58e9afe2bd-3'
 
 steps:
   # Step 1: Clone the notebook repository
@@ -24,10 +24,10 @@ steps:
       - '-c'
       - |
         # Configure Databricks CLI
-        echo $DATABRICKS_TOKEN | /usr/local/bin/databricks configure --token
+        echo $_DATABRICKS_TOKEN | /usr/local/bin/databricks configure --token
 
         # Set Databricks host
-        # /usr/local/bin/databricks configure --host $DATABRICKS_HOST
+        # /usr/local/bin/databricks configure --host $_DATABRICKS_HOST
 
         # Specific notebook deployment commands (replace with your commands)
         databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
