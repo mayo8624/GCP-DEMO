@@ -31,7 +31,7 @@ jobs:
 
       - name: Import notebooks to Databricks
         run: |
-          databricks workspace import -o --language PYTHON /abc/notebook
+          databricks workspace import --language PYTHON /abc/notebook
           # Iterate through notebooks in the repository
           # for notebook_file in $(find . -name '*.py'); do
           #   databricks workspace import --format SOURCE --language PYTHON --overwrite --file "$notebook_file" "${{ env.DATABRICKS_WORKSPACE_PATH }}"
