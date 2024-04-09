@@ -35,7 +35,8 @@ jobs:
 
       - name: Import gold.py to Databricks
         run: |
-          databricks workspace import --language PYTHON gold.py /workspace/live
+          databricks workspace import --language PYTHON /workspace/live
+          # databricks workspace import --language PYTHON gold.py /workspace/live
       # - name: Import notebooks to Databricks
       #   run: |
       #     # Iterate through notebooks in the repository
