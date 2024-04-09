@@ -19,8 +19,7 @@ jobs:
           python-version: '3.x'  # Ensure Python 3.x is installed
 
       - name: Install Databricks CLI
-        run: |
-          pip install databricks-cli
+        uses: microsoft/install-databricks-cli@v1.0.0
           /home/runner/.local/bin/databricks configure --token
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
