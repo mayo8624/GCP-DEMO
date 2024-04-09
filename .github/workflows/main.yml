@@ -20,6 +20,10 @@ jobs:
 
       - name: Install Databricks CLI
         uses: microsoft/install-databricks-cli@v1.0.0
+
+      - name: Auth Databricks CLI
+        run: |
+          pip install databricks-cli
           /home/runner/.local/bin/databricks configure --token
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
