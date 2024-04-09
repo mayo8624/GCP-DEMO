@@ -21,6 +21,10 @@ jobs:
       - name: Install Databricks CLI
         uses: microsoft/install-databricks-cli@v1.0.0
         
+      - name: Configure Databricks CLI
+        run: |
+          echo $DATABRICKS_TOKEN | databricks configure --token
+          echo $DATABRICKS_HOST | databricks configure --host 
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
