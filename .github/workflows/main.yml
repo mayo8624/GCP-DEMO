@@ -19,11 +19,11 @@ jobs:
           db_api_token: ${{ secrets.DATABRICKS_TOKEN }}
           db_workspace_url: ${{ secrets.DATABRICKS_HOST }} # Replace with your Databricks workspace URL
 
-      - name: Import notebooks to Databricks
+      -  name: Import notebooks to Databricks
         run: |
           # Iterate through notebooks in the repository
-          for notebook_file in $(find . -name '*.py'); do
-            databricks workspace import -o --language PYTHON $notebook_file /<DATABRICKS_WORKSPACE_PATH>
+          find . -name '*.py' | while read notebook_file; do
+            databricks workspace import -o --language PYTHON "$notebook_file" "$DATABRICKS_WORKSPACE_PATH"
           done
         env:
           DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/imported_notebooks  # Replace with your desired Databricks workspace path
