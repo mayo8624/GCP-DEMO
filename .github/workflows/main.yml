@@ -13,17 +13,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Databricks CLI
-        uses: microsoft/install-databricks-cli@v1.0.0
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          db_api_token: ${{ secrets.DATABRICKS_TOKEN }}
-          db_workspace_url: ${{ secrets.DATABRICKS_HOST }} # Replace with your Databricks workspace URL
+          python-version: '3.x'  # Ensure Python 3.x is installed
+
+      - name: Install Databricks CLI
+        run: |
+          pip install databricks-cli
+          /home/runner/.local/bin/databricks configure --token
+        env:
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
 
       - name: Import notebooks to Databricks
         run: |
           # Iterate through notebooks in the repository
           find . -name '*.py' | while read notebook_file; do
-            databricks workspace import -o --language PYTHON "$notebook_file" "$DATABRICKS_WORKSPACE_PATH"
+            databricks workspace import -o --language PYTHON "$notebook_file" "${{ env.DATABRICKS_WORKSPACE_PATH }}"
           done
         env:
           DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/imported_notebooks  # Replace with your desired Databricks workspace path
