@@ -29,11 +29,11 @@ jobs:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
-      # - name: Import notebooks to Databricks
-      #   run: |
-      #     # Iterate through notebooks in the repository
-      #     find . -name '*.py' | while read notebook_file; do
-      #       databricks workspace import -o --language PYTHON "$notebook_file" "${{ env.DATABRICKS_WORKSPACE_PATH }}"
-      #     done
-      #   env:
-      #     DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/imported_notebooks  # Replace with your desired Databricks workspace path
+      - name: Import notebooks to Databricks
+        run: |
+          # Iterate through notebooks in the repository
+          find . -name '*.py' | while read notebook_file; do
+            databricks workspace import -o --language PYTHON "$notebook_file" "${{ env.DATABRICKS_WORKSPACE_PATH }}"
+          done
+        env:
+          DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/imported_notebooks  # Replace with your desired Databricks workspace path
