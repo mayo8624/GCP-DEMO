@@ -17,19 +17,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'  # Ensure Python 3.x is installed
-      - name: Databricks Deploy
-        uses: antstackio/databricks-deploy@v1.0.4
-        with:
-    # Hostname of the Databricks workspace in which to deploy the latest code. If unspecified, the hostname will be inferred from the DATABRICKS_HOST environment variable. Either this parameter or the DATABRICKS_HOST environment variable must be set.
-           databricks-host: ${{ secrets.DATABRICKS_HOST }}
-    # Repo Id of the Databricks repo. If unspecified, the repo-id will be inferred from the DATABRICKS_REPO_ID environment variable.  Either this parameter or the DATABRICKS_REPO_ID environment variable must be set.
-           databricks-repo-id: GCP-DEMO
-    # The branch of the Databricks repo-id mentioned above. This action will update the mentioned branch.
-           databricks-repo-branch: main 
-           databricks-token: ${{ secrets.DATABRICKS_TOKEN }}
+    
       
-      # - name: Install Databricks CLI
-      #   uses: microsoft/install-databricks-cli@v1.0.0
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
         
       # - name: Configure Databricks CLI
       #   run: |
