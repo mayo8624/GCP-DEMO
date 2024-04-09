@@ -1,40 +1,78 @@
-# Define the service account used by Cloud Build
-serviceAccount: "gcp-sp@databricks-devops.iam.gserviceaccount.com"
+# This is a Databricks asset bundle definition for external_data_ingestion.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: external_data_ingestion
 
-# Specify the Docker images (replace with appropriate images)
-images:
-  - 'gcr.io/cloud-builders/git'  
-  - 'timvancann/databricks-cli'
+include:
+  - resources/*.yaml
 
-# Define substitutions for environment variables
-substitutions:
-  _DATABRICKS_HOST: 'https://adb-1499785588441012.12.azuredatabricks.net'
-  _DATABRICKS_TOKEN: 'dapicd225a3be886969133e88a58e9afe2bd-3'
+# permissions:
+#   - level: CAN_MANAGE
+#     group_name: ads-team
 
-steps:
-  # Step 1: Clone the notebook repository
-  - name: 'gcr.io/cloud-builders/git' 
-    args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
-    dir: 'workspace'
+# variables:
+#   spark-hive-udf-version:
+#     description: Spark Hive UDF Package Version
+#     default: 1.0.0
 
-  # Step 2: Deploy notebook to Databricks (using your preferred image)
-  - name: 'timvancann/databricks-cli'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        # Configure Databricks CLI
-        echo $_DATABRICKS_TOKEN | /usr/local/bin/databricks configure --token
+targets:
+  dev:
+    mode: development
+    default: true
+    # variables:
+    #   spark-hive-udf-version: 1.0.0
+    workspace:
+      host: https://4356542637161713.3.gcp.databricks.com
+    git:
+      branch: main
 
-        # Set Databricks host
-        # /usr/local/bin/databricks configure --host $_DATABRICKS_HOST
+  # prod:
+  #   mode: production
+  #   variables:
+  #     spark-hive-udf-version: 1.0.0
+  #   workspace:
+  #     host: https://4356542637161713.3.gcp.databricks.com
+  #   git:
+  #     branch: main
 
-        # Specific notebook deployment commands (replace with your commands)
-        databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
 
-options:
-  # Configure logs and notifications (optional)
-  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+# # Define the service account used by Cloud Build
+# serviceAccount: "gcp-sp@databricks-devops.iam.gserviceaccount.com"
+
+# # Specify the Docker images (replace with appropriate images)
+# images:
+#   - 'gcr.io/cloud-builders/git'  
+#   - 'timvancann/databricks-cli'
+
+# # Define substitutions for environment variables
+# substitutions:
+#   _DATABRICKS_HOST: 'https://adb-1499785588441012.12.azuredatabricks.net'
+#   _DATABRICKS_TOKEN: 'dapicd225a3be886969133e88a58e9afe2bd-3'
+
+# steps:
+#   # Step 1: Clone the notebook repository
+#   - name: 'gcr.io/cloud-builders/git' 
+#     args: ['clone', 'https://github.com/mayo8624/GCP-DEMO.git']
+#     dir: 'workspace'
+
+#   # Step 2: Deploy notebook to Databricks (using your preferred image)
+#   - name: 'timvancann/databricks-cli'
+#     entrypoint: 'bash'
+#     args:
+#       - '-c'
+#       - |
+#         # Configure Databricks CLI
+#         echo $_DATABRICKS_TOKEN | /usr/local/bin/databricks configure --token
+
+#         # Set Databricks host
+#         # /usr/local/bin/databricks configure --host $_DATABRICKS_HOST
+
+#         # Specific notebook deployment commands (replace with your commands)
+#         databricks workspace import -o --language PYTHON /workspace/abc/notebook.dbc /workspace/live
+
+# options:
+#   # Configure logs and notifications (optional)
+#   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 
 
 # steps:
