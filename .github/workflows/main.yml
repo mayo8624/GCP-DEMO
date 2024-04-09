@@ -23,7 +23,7 @@ jobs:
     # Hostname of the Databricks workspace in which to deploy the latest code. If unspecified, the hostname will be inferred from the DATABRICKS_HOST environment variable. Either this parameter or the DATABRICKS_HOST environment variable must be set.
            databricks-host: ${{ secrets.DATABRICKS_HOST }}
     # Repo Id of the Databricks repo. If unspecified, the repo-id will be inferred from the DATABRICKS_REPO_ID environment variable.  Either this parameter or the DATABRICKS_REPO_ID environment variable must be set.
-           databricks-repo-id: https://github.com/mayo8624/GCP-DEMO.git
+           databricks-repo-id: GCP-DEMO
     # The branch of the Databricks repo-id mentioned above. This action will update the mentioned branch.
            databricks-repo-branch: main 
            databricks-token: ${{ secrets.DATABRICKS_TOKEN }}
