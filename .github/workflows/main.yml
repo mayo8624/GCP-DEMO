@@ -1,0 +1,29 @@
+name: Deploy Databricks Notebooks
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Databricks CLI
+        uses: databrickslabs/databricks-terraform-github-action@v0.3
+        with:
+          db_api_token: ${{ secrets.DATABRICKS_TOKEN }}
+          db_workspace_url: ${{ secrets.DATABRICKS_HOST }} # Replace with your Databricks workspace URL
+
+      - name: Import notebooks to Databricks
+        run: |
+          # Iterate through notebooks in the repository
+          for notebook_file in $(find . -name '*.py'); do
+            databricks workspace import -o --language PYTHON $notebook_file /<DATABRICKS_WORKSPACE_PATH>
+          done
+        env:
+          DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/imported_notebooks  # Replace with your desired Databricks workspace path
