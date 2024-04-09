@@ -31,11 +31,13 @@ jobs:
       - name: Clone GitHub Repository
         run: |
           git clone https://github.com/mayo8624/GCP-DEMO.git
+          cd GCP-DEMO
         # Navigate to the cloned repository directory
 
       - name: Import gold.py to Databricks
         run: |
-           databricks workspace import --language PYTHON /gold.py
+            databricks workspace import --language PYTHON --format SOURCE --file gold.py /workspace/live
+           # databricks workspace import --language PYTHON /gold2.py
           # databricks workspace import --language PYTHON gold.py /workspace/live
       # - name: Import notebooks to Databricks
       #   run: |
