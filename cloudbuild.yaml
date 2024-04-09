@@ -3,8 +3,8 @@
 # bundle:
 #   name: external_data_ingestion
 
-include:
-  - resources/*.yaml
+# include:
+#   - resources/*.yaml
 
 # permissions:
 #   - level: CAN_MANAGE
