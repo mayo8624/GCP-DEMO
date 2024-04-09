@@ -23,7 +23,8 @@ jobs:
 
       - name: Auth Databricks CLI
         run: |
-          databricks configure --host "${{ secrets.DATABRICKS_HOST }}" --token "${{ secrets.DATABRICKS_TOKEN }}"
+          databricks configure --token "${{ secrets.DATABRICKS_TOKEN }}"
+          databricks configure --host "${{ secrets.DATABRICKS_HOST }}"
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
