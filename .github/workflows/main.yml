@@ -33,15 +33,15 @@ jobs:
           git clone https://github.com/mayo8624/GCP-DEMO.git
         # Navigate to the cloned repository directory
 
-      # - name: Import gold.py to Databricks
-         # run: |
-          # databricks workspace import --language PYTHON /gold.py
-          # databricks workspace import --language PYTHON gold.py /workspace/live
-      - name: Import notebooks to Databricks
+      - name: Import gold.py to Databricks
         run: |
-          # Iterate through notebooks in the repository
-          # for notebook_file in $(find . -name '*.py'); do
-             databricks workspace import --format SOURCE --language PYTHON --overwrite --file "Gold.py" "${{ env.DATABRICKS_WORKSPACE_PATH }}"
-          # done
+           databricks workspace import --language PYTHON /gold.py
+          # databricks workspace import --language PYTHON gold.py /workspace/live
+      # - name: Import notebooks to Databricks
+      #   run: |
+      #     # Iterate through notebooks in the repository
+      #     # for notebook_file in $(find . -name '*.py'); do
+      #        databricks workspace import --format SOURCE --language PYTHON --overwrite --file "Gold.py" "${{ env.DATABRICKS_WORKSPACE_PATH }}"
+      #     # done
         env:
           DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/abc  # Replace with your desired Databricks workspace path
