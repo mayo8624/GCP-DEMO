@@ -19,7 +19,7 @@ jobs:
           db_api_token: ${{ secrets.DATABRICKS_TOKEN }}
           db_workspace_url: ${{ secrets.DATABRICKS_HOST }} # Replace with your Databricks workspace URL
 
-      -  name: Import notebooks to Databricks
+      - name: Import notebooks to Databricks
         run: |
           # Iterate through notebooks in the repository
           find . -name '*.py' | while read notebook_file; do
