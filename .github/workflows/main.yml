@@ -23,9 +23,6 @@ jobs:
 
       - name: Auth Databricks CLI
         run: |
-          # Find the path to the installed Databricks CLI executable
-          databricks_cli_path=$(python -c "import site; print(site.USER_BASE) + '/bin/databricks'")
-          export PATH="$PATH:$databricks_cli_path"
           databricks configure --host "${{ secrets.DATABRICKS_HOST }}" --token "${{ secrets.DATABRICKS_TOKEN }}"
         env:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
