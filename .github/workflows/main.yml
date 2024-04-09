@@ -46,4 +46,4 @@ jobs:
              databricks workspace import --format SOURCE --language PYTHON --overwrite --file "$notebook_file" "${{ env.DATABRICKS_WORKSPACE_PATH }}"
            done
         env:
-          DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/abcd  # Replace with your desired Databricks workspace path
+          DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/abcd2  # Replace with your desired Databricks workspace path
