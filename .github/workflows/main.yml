@@ -43,16 +43,16 @@ jobs:
            target_path="$target_folder/$notebook_name"
   
           # Check if the notebook already exists in the target folder
-          if databricks workspace ls "$target_path" &> /dev/null; then
-           echo "Notebook $notebook_name already exists in Databricks folder: $target_folder"
+           if databricks workspace ls "$target_path" &> /dev/null; then
+            echo "Notebook $notebook_name already exists in Databricks folder: $target_folder"
           # Handle the conflict (e.g., skip, overwrite, rename)
           # Example: Handle the conflict by skipping the import
             echo "Skipping import of $notebook_name"
-          else
+           else
             echo "Importing $notebook_name to Databricks folder: $target_folder"
             # Perform the import
             databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$target_path"
-            fi
+           fi
           done
       # - name: Import Notebooks to Databricks
       #   run: |
