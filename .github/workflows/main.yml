@@ -88,9 +88,11 @@ jobs:
           databricks_folder_path="/live"
 
           echo "Copying folder from $local_folder_path to Databricks workspace folder: $databricks_folder_path"
-
-          # Use Databricks CLI to recursively copy the local folder to Databricks workspace
-          databricks workspace import_dir --overwrite "$local_folder_path" "$databricks_folder_path"
+          
+           databricks workspace mkdirs "$databricks_folder_path"  # Create the target folder if it doesn't exist
+           rsync -av --ignore-existing "$local_folder_path"/* "$databricks_folder_path/"
+          # # Use Databricks CLI to recursively copy the local folder to Databricks workspace
+          # databricks workspace import_dir --overwrite "$local_folder_path" "$databricks_folder_path"
 
       # - name: Import Notebooks to Databricks Working
       #   run: |
