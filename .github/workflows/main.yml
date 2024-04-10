@@ -82,7 +82,7 @@ jobs:
       # - name: Copy Folder to Databricks Workspace
       #   run: |
       #     # Define local folder path to be copied
-      #     local_folder_path="GCP-DEMO"
+      #     local_folder_path="demodemo"
 
       #     # Define target folder path in Databricks workspace where the folder will be copied
       #     databricks_folder_path="/live"
@@ -97,7 +97,7 @@ jobs:
       - name: Import Notebooks to Databricks Working
         run: |
           # Define local path to the folder containing notebooks
-          local_folder_path="demodemo"
+          local_folder_path="GCP-DEMO"
 
           # Define target path in Databricks workspace where notebooks will be imported
           databricks_folder_path="/live"
