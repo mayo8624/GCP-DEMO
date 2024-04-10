@@ -35,6 +35,7 @@ jobs:
         # Navigate to the cloned repository directory
       - name: Import Notebooks to Databricks
         run: |
+          target_folder="/live"
           # Define the target Databricks folder
           # Iterate through all Python notebooks in the repository and import them
           find . -name '*.py' | while read notebook_file; do
