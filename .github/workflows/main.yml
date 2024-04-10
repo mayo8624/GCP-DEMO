@@ -33,17 +33,38 @@ jobs:
           git clone https://github.com/mayo8624/GCP-DEMO.git
           cd GCP-DEMO
         # Navigate to the cloned repository directory
-      - name: Import Notebooks to Databricks
+      - name: import Demo
         run: |
           target_folder="/live"
           # Define the target Databricks folder
-          # Find all Python notebooks in the repository and import them one by one
+          # Iterate through all Python notebooks in the repository and import them one by one
           find . -name '*.py' | while IFS= read -r notebook_file; do
-            notebook_name=$(basename "$notebook_file")
+           notebook_name=$(basename "$notebook_file")
+           target_path="$target_folder/$notebook_name"
+  
+          # Check if the notebook already exists in the target folder
+          if databricks workspace ls "$target_path" &> /dev/null; then
+           echo "Notebook $notebook_name already exists in Databricks folder: $target_folder"
+          # Handle the conflict (e.g., skip, overwrite, rename)
+          # Example: Handle the conflict by skipping the import
+            echo "Skipping import of $notebook_name"
+          else
             echo "Importing $notebook_name to Databricks folder: $target_folder"
-            databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$target_folder/$notebook_name"
+            # Perform the import
+            databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$target_path"
+            fi
           done
-        shell: bash
+      # - name: Import Notebooks to Databricks
+      #   run: |
+      #     target_folder="/live"
+      #     # Define the target Databricks folder
+      #     # Find all Python notebooks in the repository and import them one by one
+      #     find . -name '*.py' | while IFS= read -r notebook_file; do
+      #       notebook_name=$(basename "$notebook_file")
+      #       echo "Importing $notebook_name to Databricks folder: $target_folder"
+      #       databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$target_folder/$notebook_name"
+      #     done
+      #   shell: bash
       # - name: Import Notebooks to Databricks
       #   run: |
       #     target_folder="/live"
