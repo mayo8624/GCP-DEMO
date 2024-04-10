@@ -68,7 +68,7 @@ jobs:
       - name: Import Notebooks to Databricks
         run: |
           target_folder="/live"
-          while read notebook_file; do
+          find . -name '*.py' | while read notebook_file; do
             notebook_name=$(basename "$notebook_file")
             destination_file="$target_folder/$notebook_name"
             if ! test -f "$destination_file"; then
