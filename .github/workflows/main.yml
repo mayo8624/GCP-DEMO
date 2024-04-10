@@ -79,37 +79,37 @@ jobs:
       #   shell: bash
 
 
-      - name: Copy Folder to Databricks Workspace
-        run: |
-          # Define local folder path to be copied
-          local_folder_path="demodemo"
-
-          # Define target folder path in Databricks workspace where the folder will be copied
-          databricks_folder_path="/live"
-
-          echo "Copying folder from $local_folder_path to Databricks workspace folder: $databricks_folder_path"
-          
-           databricks workspace mkdirs "$databricks_folder_path"  # Create the target folder if it doesn't exist
-           rsync -av --ignore-existing "$local_folder_path"/* "$databricks_folder_path/"
-          # # Use Databricks CLI to recursively copy the local folder to Databricks workspace
-          # databricks workspace import_dir --overwrite "$local_folder_path" "$databricks_folder_path"
-
-      # - name: Import Notebooks to Databricks Working
+      # - name: Copy Folder to Databricks Workspace
       #   run: |
-      #     # Define local path to the folder containing notebooks
+      #     # Define local folder path to be copied
       #     local_folder_path="demodemo"
 
-      #     # Define target path in Databricks workspace where notebooks will be imported
+      #     # Define target folder path in Databricks workspace where the folder will be copied
       #     databricks_folder_path="/live"
 
-      #     echo "Importing notebooks from $local_folder_path to Databricks workspace folder: $databricks_folder_path"
+      #     echo "Copying folder from $local_folder_path to Databricks workspace folder: $databricks_folder_path"
+          
+      #      databricks workspace mkdirs "$databricks_folder_path"  # Create the target folder if it doesn't exist
+      #      rsync -av --ignore-existing "$local_folder_path"/* "$databricks_folder_path/"
+      #     # # Use Databricks CLI to recursively copy the local folder to Databricks workspace
+      #     # databricks workspace import_dir --overwrite "$local_folder_path" "$databricks_folder_path"
 
-      #     # Iterate through notebooks in the local folder and import them to Databricks workspace
-      #     find "$local_folder_path" -name '*.py' -type f | while read notebook_file; do
-      #       notebook_name=$(basename "$notebook_file")
-      #       echo "Importing $notebook_name..."
-      #       databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$databricks_folder_path/$notebook_name"
-      #     done
+      - name: Import Notebooks to Databricks Working
+        run: |
+          # Define local path to the folder containing notebooks
+          local_folder_path="demodemo"
+
+          # Define target path in Databricks workspace where notebooks will be imported
+          databricks_folder_path="/live"
+
+          echo "Importing notebooks from $local_folder_path to Databricks workspace folder: $databricks_folder_path"
+
+          # Iterate through notebooks in the local folder and import them to Databricks workspace
+          find "$local_folder_path" -name '*.py' -type f | while read notebook_file; do
+            notebook_name=$(basename "$notebook_file")
+            echo "Importing $notebook_name..."
+            databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$databricks_folder_path/$notebook_name"
+          done
 
 
 
