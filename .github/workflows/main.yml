@@ -63,8 +63,8 @@ jobs:
          databricks workspace import_dir --overwrite "${LOCAL_NOTEBOOKS_PATH}" "${REMOTE_NOTEBOOK_PATH}" --debug
         shell: bash
         env:
-        LOCAL_NOTEBOOKS_PATH: '.github/workflows'
-        REMOTE_NOTEBOOK_PATH: 'live'
+           LOCAL_NOTEBOOKS_PATH: '.github/workflows'
+           REMOTE_NOTEBOOK_PATH: 'live'
       # - name: Import Notebooks to Databricks
       #   run: |
       #     target_folder="/live"
@@ -115,5 +115,5 @@ jobs:
       #        databricks workspace import --format SOURCE --language PYTHON --overwrite --file "$notebook_file" "${{ env.DATABRICKS_WORKSPACE_PATH }}"
       #      done
         
-        env:
-          DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/abcd2  # Replace with your desired Databricks workspace path
+        # env:
+        #   DATABRICKS_WORKSPACE_PATH: /Users/prathamesh.bhamare@celebaltech.com/abcd2  # Replace with your desired Databricks workspace path
