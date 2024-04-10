@@ -57,14 +57,15 @@ jobs:
       #      fi
       #     done
 
-      - name: import Notebooks Demo
-        run: | 
-         echo "Uploading notebooks from $LOCAL_NOTEBOOKS_PATH to $REMOTE_NOTEBOOK_PATH in the workspace $DATABRICKS_HOST"
-         databricks workspace import_dir --overwrite "${LOCAL_NOTEBOOKS_PATH}" "${REMOTE_NOTEBOOK_PATH}" --debug
-        shell: bash
-        env:
-           LOCAL_NOTEBOOKS_PATH: 'demodemo'
-           REMOTE_NOTEBOOK_PATH: 'live'
+      # - name: import Notebooks Demo
+      #   run: | 
+      #    echo "Uploading notebooks from $LOCAL_NOTEBOOKS_PATH to $REMOTE_NOTEBOOK_PATH in the workspace $DATABRICKS_HOST"
+      #    databricks workspace import_dir --overwrite "${LOCAL_NOTEBOOKS_PATH}" "${REMOTE_NOTEBOOK_PATH}" --debug
+      #   shell: bash
+      #   env:
+      #      LOCAL_NOTEBOOKS_PATH: 'demodemo'
+      #      REMOTE_NOTEBOOK_PATH: 'live'
+      
       # - name: Import Notebooks to Databricks
       #   run: |
       #     target_folder="/live"
@@ -78,19 +79,19 @@ jobs:
       #   shell: bash
 
       
-      # - name: Import Notebooks to Databricks
-      #   run: |
-      #     target_folder="/live"
-      #     find . -name '*.py' | while read notebook_file; do
-      #       notebook_name=$(basename "$notebook_file")
-      #       destination_file="$target_folder/$notebook_name"
-      #       if ! test -f "$destination_file"; then
-      #        echo "Importing $notebook_name to Databricks folder: $target_folder"
-      #        databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$destination_file"
-      #       else
-      #        echo "Skipping existing notebook: $destination_file"
-      #       fi
-      #     done
+      - name: Import Notebooks to Databricks
+        run: |
+          target_folder="/live"
+          find . -name '*.py' | while read notebook_file; do
+            notebook_name=$(basename "$notebook_file")
+            destination_file="$target_folder/$notebook_name"
+            if ! test -f "$destination_file"; then
+             echo "Importing $notebook_name to Databricks folder: $target_folder"
+             databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$destination_file"
+            else
+             echo "Skipping existing notebook: $destination_file"
+            fi
+          done
 
       
           # Define the target Databricks folder
