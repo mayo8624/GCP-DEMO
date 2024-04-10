@@ -34,15 +34,28 @@ jobs:
           cd GCP-DEMO
         # Navigate to the cloned repository directory
       - name: Import Notebooks to Databricks
-        run: |
-          target_folder="/live"
-          # Define the target Databricks folder
-          # Iterate through all Python notebooks in the repository and import them
-          find . -name '*.py' | while read notebook_file; do
-            notebook_name=$(basename "$notebook_file")
-            echo "Importing $notebook_name to Databricks folder: $target_folder"
-            databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$target_folder/$notebook_name"
-          done
+  run: |
+    target_folder="/live"
+    # Define the target Databricks folder
+    # Find all Python notebooks in the repository and import them one by one
+    find . -name '*.py' | while IFS= read -r notebook_file; do
+      notebook_name=$(basename "$notebook_file")
+      echo "Importing $notebook_name to Databricks folder: $target_folder"
+      databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$target_folder/$notebook_name"
+    done
+  shell: bash
+      # - name: Import Notebooks to Databricks
+      #   run: |
+      #     target_folder="/live"
+      #     # Define the target Databricks folder
+      #     # Iterate through all Python notebooks in the repository and import them
+      #     find . -name '*.py' | while read notebook_file; do
+      #       notebook_name=$(basename "$notebook_file")
+      #       echo "Importing $notebook_name to Databricks folder: $target_folder"
+      #       databricks workspace import --language PYTHON --format SOURCE --file "$notebook_file" "$target_folder/$notebook_name"
+      #     done
+
+          
       # - name: Import gold.py to Databricks
       #   run: |
       #       databricks workspace import --language PYTHON --format SOURCE --file Gold.py /live/gold
