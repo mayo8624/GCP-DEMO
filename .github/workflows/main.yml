@@ -46,8 +46,6 @@ jobs:
           notebook_name=$(basename "$notebook_file")
           echo "Importing $notebook_name..."
           databricks workspace import \
-            
-            --token "$DATABRICKS_TOKEN" \
             --language PYTHON \
             --format SOURCE \
             --file "$notebook_file" \
