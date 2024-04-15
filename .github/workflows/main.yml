@@ -57,7 +57,7 @@ jobs:
         env:
            DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
            DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-           LOCAL_FOLDER_PATH: part2
+           LOCAL_FOLDER_PATH: Part2
            DATABRICKS_FOLDER_PATH: /live
         run: |
           echo "Importing notebooks from $LOCAL_FOLDER_PATH to Databricks workspace folder: $DATABRICKS_FOLDER_PATH"
