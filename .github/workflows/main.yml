@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'  # Ensure Python 3.x is installed
-    
+  
       
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
