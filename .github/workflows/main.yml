@@ -58,7 +58,7 @@ jobs:
            DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
            DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
            LOCAL_FOLDER_PATH: Part2
-           DATABRICKS_FOLDER_PATH: /live
+           DATABRICKS_FOLDER_PATH: /live2
         run: |
           echo "Importing notebooks from $LOCAL_FOLDER_PATH to Databricks workspace folder: $DATABRICKS_FOLDER_PATH"
           find "$LOCAL_FOLDER_PATH" -name '*.py' -type f | while read notebook_file; do
