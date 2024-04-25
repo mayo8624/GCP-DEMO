@@ -1,9 +1,9 @@
 name: Deploy Databricks Notebooks
 
-on:
-  push:
-    branches:
-      - main  # Adjust the branch name as needed
+# on:
+#   push:
+#     branches:
+#       - main  # Adjust the branch name as needed
 
 jobs:
   deploy:
